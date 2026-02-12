@@ -14,8 +14,8 @@ struct Rm: ParsableCommand {
     var args: [String]
 
     func run() throws {
-        // Filter out flags, keep file paths
         var files: [String] = []
+        var force = false
         var pastDoubleDash = false
 
         for arg in args {
@@ -24,6 +24,7 @@ struct Rm: ParsableCommand {
             } else if arg == "--" {
                 pastDoubleDash = true
             } else if arg.hasPrefix("-") {
+                if arg.contains("f") { force = true }
                 continue
             } else {
                 files.append(arg)
@@ -35,9 +36,16 @@ struct Rm: ParsableCommand {
             throw ExitCode.failure
         }
 
+        let fm = FileManager.default
+
         for file in files {
-            // Prefix with ./ if it starts with - to avoid trash misinterpreting it
             let path = file.hasPrefix("-") ? "./\(file)" : file
+
+            if !fm.fileExists(atPath: path) {
+                if force { continue }
+                fputs("rm: \(file): No such file or directory\n", stderr)
+                throw ExitCode.failure
+            }
 
             let task = Process()
             task.executableURL = URL(fileURLWithPath: "/usr/bin/trash")
