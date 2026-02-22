@@ -27,11 +27,6 @@ rm -- -weird-name    # handle filenames starting with -
 
 Supports `-f` (force/silent) and `--` (end of options). All other flags are ignored — files always go to Trash.
 
-## Requirements
-
-- macOS 14+ (Sonoma)
-- Swift 6.0
-
 ## License
 
 MIT
