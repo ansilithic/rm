@@ -1,8 +1,6 @@
-# rm
+# rm — safe file deletion for macOS
 
-Move files to Trash instead of permanently deleting them.
-
-Drop-in replacement for `/bin/rm` that delegates to `/usr/bin/trash`, so deleted files are recoverable from the macOS Trash.
+A drop-in replacement for `/bin/rm` that moves files to the macOS Trash instead of permanently deleting them. Built in Swift, delegates to `/usr/bin/trash` so every deletion is recoverable.
 
 ## Install
 
