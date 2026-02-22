@@ -5,14 +5,14 @@ A drop-in replacement for `/bin/rm` that moves files to the macOS Trash instead 
 ## Install
 
 ```sh
-swift build -c release
-cp .build/release/rm ~/.local/bin/
+brew install ansilithic/tap/rm
 ```
 
-Or with Make:
+Or build from source:
 
 ```sh
-make build install
+swift build -c release
+cp .build/release/rm ~/.local/bin/
 ```
 
 Ensure `~/.local/bin` is earlier in your `$PATH` than `/bin` to shadow the system `rm`.
