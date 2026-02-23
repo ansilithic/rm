@@ -12,10 +12,10 @@ Or build from source:
 
 ```sh
 swift build -c release
-cp .build/release/rm ~/.local/bin/
+cp .build/release/rm /usr/local/bin/
 ```
 
-Ensure `~/.local/bin` is earlier in your `$PATH` than `/bin` to shadow the system `rm`.
+Ensure `/usr/local/bin` is earlier in `$PATH` than `/bin` to shadow the system `rm`.
 
 ## Usage
 
