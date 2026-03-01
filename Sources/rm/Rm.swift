@@ -32,6 +32,7 @@ struct Rm: ParsableCommand {
         }
 
         guard !files.isEmpty else {
+            if force { return }
             fputs("usage: rm file ...\n", stderr)
             throw ExitCode.failure
         }
