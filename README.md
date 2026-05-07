@@ -14,11 +14,7 @@ Supports `-f` (suppress errors for missing files) and `--` (end of options for f
 
 ## Install
 
-```sh
-brew install ansilithic/tap/rm
-```
-
-Or build from source (requires Xcode and macOS 14+):
+Build from source (requires Xcode and macOS 14+):
 
 ```sh
 make build && make install
