@@ -1,4 +1,5 @@
 import ArgumentParser
+import Darwin
 import Foundation
 
 @main
@@ -37,12 +38,14 @@ struct Rm: ParsableCommand {
             throw ExitCode.failure
         }
 
-        let fm = FileManager.default
-
         for file in files {
             let path = file.hasPrefix("-") ? "./\(file)" : file
 
-            if !fm.fileExists(atPath: path) {
+            // lstat (not stat / FileManager.fileExists) so dangling symlinks
+            // are detected as existing in the FS namespace — /usr/bin/trash
+            // is happy to move a symlink whose target is gone.
+            var st = stat()
+            if lstat(path, &st) != 0 {
                 if force { continue }
                 fputs("rm: \(file): No such file or directory\n", stderr)
                 throw ExitCode.failure
